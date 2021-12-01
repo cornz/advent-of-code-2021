@@ -1,17 +1,21 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+    fun part1(input: List<Int>): Int {
+        var i = 0;
+        var previousMeasure: Int = Int.MAX_VALUE;
+        for (measure: Int in input) {
+            if (measure > previousMeasure) {
+                i += 1
+            }
+            previousMeasure = measure
+        }
+        return i
     }
 
     fun part2(input: List<String>): Int {
         return input.size
     }
 
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
     val input = readInput("Day01")
-    println(part1(input))
-    println(part2(input))
+    println(part1(input.map { it.toInt()}))
+
 }
