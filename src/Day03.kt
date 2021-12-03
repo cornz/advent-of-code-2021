@@ -7,19 +7,15 @@ fun main() {
         }
         val countOfZeros = arrayList.count { it == "0"[0] }
         val countOfOnes = arrayList.count { it == "1"[0] }
-        if (mostOrLeast) {
-            return if (countOfZeros > countOfOnes) {
+        return if (mostOrLeast) {
+            if (countOfZeros > countOfOnes) {
                 "0"
-            } else if (countOfZeros < countOfOnes) {
-                "1"
             } else {
                 "1"
             }
         } else {
-            return if (countOfZeros > countOfOnes) {
+            if (countOfZeros > countOfOnes) {
                 "1"
-            } else if (countOfZeros < countOfOnes) {
-                "0"
             } else {
                 "0"
             }
