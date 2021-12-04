@@ -93,7 +93,59 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int {
-        return 0
+        val toBeDrawnNumbers = input[0].split(",").map { it.toInt() }
+        val drawnNumbers = mutableListOf<Int>()
+
+        val boards = getBoards(input)
+        val allWinningRows = mutableListOf<List<Int>>()
+        for (board: List<String> in boards) {
+            val winningRows = getWinningRows(board)
+            allWinningRows.addAll(winningRows)
+        }
+
+        var winningBoard: List<String>
+        var sum = 0
+        var winningBoards = mutableListOf<List<String>>()
+        for (number: Int in toBeDrawnNumbers) {
+            drawnNumbers.add(number)
+            for (list: List<Int> in allWinningRows) {
+                if (drawnNumbers.containsAll(list)) {
+                    for (board: List<String> in boards) {
+                        for (row: String in board) {
+                            val line = row.replace("  ", " ").trim().split(" ").map { it.toInt() }
+                            if  (line == list) {
+                                if (board !in winningBoards) {
+                                    winningBoards.add(board.toList())
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        val lastWinningBoard = winningBoards.last()
+        val lastWinningRows = getWinningRows(lastWinningBoard)
+        drawnNumbers.clear()
+        sum = 0
+        for (number: Int in toBeDrawnNumbers) {
+            drawnNumbers.add(number)
+            for (list: List<Int> in lastWinningRows) {
+                if (drawnNumbers.containsAll(list)) {
+                        for (row: String in lastWinningBoard) {
+                            val line = row.replace("  ", " ").trim().split(" ").map { it.toInt() }
+                            for (item: Int in line) {
+                                if (item !in drawnNumbers) {
+                                    sum += item
+                                }
+                            }
+                        }
+                    return sum*number
+                    }
+                }
+            }
+
+        return winningBoards.count()
     }
 
 
