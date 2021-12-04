@@ -2,10 +2,10 @@ fun main() {
 
     fun getWinningRows(input: List<String>): List<List<Int>> {
         val winningRows = mutableListOf<List<Int>>()
-        val sizeOfMatrix = input[2].replace("  ", " ").trim().split(" ").map { it.toInt() }.count()
+        val sizeOfMatrix = input[0].replace("  ", " ").trim().split(" ").map { it.toInt() }.count()
 
-        for (i in 2..6) {
-            val row = input[i].replace("  ", " ").trim().split(" ").map { it.toInt() }
+        for (element in input) {
+            val row = element.replace("  ", " ").trim().split(" ").map { it.toInt() }
             winningRows.add(row)
         }
         val winningRowsVertical = mutableListOf<List<Int>>()
@@ -35,11 +35,61 @@ fun main() {
         return winningRowsTotal
     }
 
-    fun part1(input: List<String>): Int {
-        val drawnNumbers = input[0].split(",").map { it.toInt() }
-        val winningRows = getWinningRows(input)
+    fun getBoards(input: List<String>): MutableList<List<String>> {
+        val boards = mutableListOf<List<String>>()
+        val sublist = mutableListOf<String>()
+        for (i in 2 until input.size) {
+            if (input[i] != "") {
+                sublist.add(input[i])
+            } else {
+                boards.add(sublist.toList())
+                sublist.clear()
+            }
+        }
+        return boards
+    }
 
-        return winningRows.count()
+
+    fun part1(input: List<String>): Int {
+        val toBeDrawnNumbers = input[0].split(",").map { it.toInt() }
+        val drawnNumbers = mutableListOf<Int>()
+
+        val boards = getBoards(input)
+        val allWinningRows = mutableListOf<List<Int>>()
+        for (board: List<String> in boards) {
+            val winningRows = getWinningRows(board)
+            allWinningRows.addAll(winningRows)
+        }
+
+        val winningBoard: List<String>
+        var sum = 0
+        for (number: Int in toBeDrawnNumbers) {
+            drawnNumbers.add(number)
+            for (list: List<Int> in allWinningRows) {
+                if (drawnNumbers.containsAll(list)) {
+                    for (board: List<String> in boards) {
+                        for (row: String in board) {
+                            val line = row.replace("  ", " ").trim().split(" ").map { it.toInt() }
+                            if  (line == list) {
+                                winningBoard = board
+                                for (it: String in winningBoard) {
+                                    val winningLine = it.replace("  ", " ").trim().split(" ").map { it.toInt() }
+                                    for (winningItem: Int in winningLine) {
+                                        if (winningItem !in drawnNumbers) {
+                                            sum+=winningItem
+                                        }
+                                    }
+                                }
+                                return sum*number
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        return allWinningRows.count()
     }
 
     fun part2(input: List<String>): Int {
@@ -53,11 +103,5 @@ fun main() {
     println(part1(input))
     println(part2(inputTest))
     println(part2(input))
-
-    class BingoCard(
-        val cardValue: Int,
-        val isChecked: Boolean
-    )
-
 
 }
