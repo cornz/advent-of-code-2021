@@ -22,18 +22,18 @@ fun main() {
 
 
 
-    fun part1(input: List<String>, days: Int): Int {
+    fun part1(input: List<String>, days: Int): Long {
         val fishes = input[0].split(",").map { Fish(it.toInt()) }.toMutableList()
         repeat(days) {
             val newFishes = fishes.mapNotNull { it.addFish() }
             fishes += newFishes
         }
 
-        return fishes.count()
+        return fishes.count().toLong()
     }
 
-    fun part2(input: List<String>): Int {
-        return 0
+    fun part2(input: List<String>, days: Int): Long {
+        return 0L
     }
 
 
@@ -42,8 +42,9 @@ fun main() {
     println(part1(inputTest, 18))
     println(part1(inputTest, 80))
     println(part1(input, 80))
-    //println(part2(inputTest))
-    //println(part2(input))
+    //println(part1(input, 250))
+    //println(part2(inputTest, 256))
+    //println(part2(input, 256))
 
 
 }
