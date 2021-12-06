@@ -85,27 +85,6 @@ fun main() {
             val fromY = fromTo[0].split(",")[1].toInt()
             val toX = fromTo[1].split(",")[0].toInt()
             val toY = fromTo[1].split(",")[1].toInt()
-            if (fromX == toX) {
-                if (fromY > toY) {
-                    for (i in toY .. fromY) {
-                        grid[i][fromX] += 1
-                    }
-                } else {
-                    for (i in fromY .. toY) {
-                        grid[i][fromX] += 1
-                    }
-                }
-            } else if (fromY == toY) {
-                if (fromX > toX) {
-                    for (i in toX .. fromX) {
-                        grid[fromY][i] += 1
-                    }
-                } else {
-                    for (i in fromX..toX) {
-                        grid[fromY][i] += 1
-                    }
-                }
-            } else {
                 val deltaX = toX - fromX
                 val deltaY = toY - fromY
                 val maximum = kotlin.math.abs(deltaX).coerceAtLeast(kotlin.math.abs(deltaY))
@@ -113,7 +92,7 @@ fun main() {
                     val x = i/maximum.toDouble() * deltaX + fromX
                     val y = i/maximum.toDouble() * deltaY + fromY
                     grid[x.roundToInt()][y.roundToInt()] += 1
-                }
+
             }
         }
         print(grid.joinToString("\n") { it.joinToString("")})
@@ -124,8 +103,8 @@ fun main() {
 
     val inputTest = readInput("Day05_test")
     val input = readInput("Day05")
-    println(part1(inputTest))
-    println(part1(input))
+    //println(part1(inputTest))
+    //println(part1(input))
     println(part2(inputTest))
     println(part2(input))
 
