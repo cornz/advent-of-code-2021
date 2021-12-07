@@ -25,7 +25,7 @@ fun main() {
             val diff = ints.sumOf {
                     x ->
                 val originalDiff = kotlin.math.abs(i - x)
-                originalDiff.toLong() * (originalDiff + 1)
+                originalDiff.toLong() * (originalDiff + 1) / 2
             }
             if (diff < fuel) {
                 fuel = diff
