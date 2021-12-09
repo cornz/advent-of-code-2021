@@ -2,6 +2,8 @@ import java.lang.Math.*
 
 fun main() {
 
+    val digitToPattern = Array<Set<Char>>(10) { emptySet() }
+
     fun part1(input: List<String>): Int {
         var rt = 0
         for (row: String in input) {
@@ -16,11 +18,12 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int {
+
         return 0
     }
 
 
-    val inputTest = readInput("Day08_Test")
+    val inputTest = readInput("Day08_est")
     val input = readInput("Day08")
     println(part1(inputTest))
     println(part1(input))
