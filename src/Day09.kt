@@ -4,8 +4,7 @@ fun main() {
 
 
     fun part1(input: List<String>): Int {
-        val grid = input.map { it.toCharArray().map { it - '0' } }
-
+        val grid = input.map { it -> it.toCharArray().map { it.digitToInt() } }
         var risk = 0
         val height = grid.size
         val width = grid[0].size
