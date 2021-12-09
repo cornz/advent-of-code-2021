@@ -10,23 +10,25 @@ fun main() {
         val height = grid.size
         val width = grid[0].size
 
-        for (y in 0 until height) for (x in 0 until width) {
-            val point = grid[y][x]
+        for (y in 0 until height) {
+            for (x in 0 until width) {
+                val point = grid[y][x]
 
-            if (x + 1 < width && grid[y][x + 1] <= point) {
-                continue
-            }
-            if (x - 1 >= 0 && grid[y][x - 1] <= point)  {
-                continue
-            }
-            if (y + 1 < height && grid[y + 1][x] <= point) {
-                continue
-            }
-            if (y - 1 >= 0 && grid[y - 1][x] <= point) {
-                continue
-            }
+                if (x + 1 < width && grid[y][x + 1] <= point) {
+                    continue
+                }
+                if (x - 1 >= 0 && grid[y][x - 1] <= point)  {
+                    continue
+                }
+                if (y + 1 < height && grid[y + 1][x] <= point) {
+                    continue
+                }
+                if (y - 1 >= 0 && grid[y - 1][x] <= point) {
+                    continue
+                }
 
-            risk += point + 1
+                risk += point + 1
+            }
         }
 
         return risk
